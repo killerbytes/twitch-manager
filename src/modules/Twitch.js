@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import qs from "qs";
-import { withRouter } from "react-router";
-import { getUser, getUserFollows, removeUserFollows } from "../api";
+import { getUser, getUserFollows } from "../api";
 import Following from "../components/Following";
 import styled from "styled-components";
 
@@ -63,13 +62,13 @@ class Twitch extends Component {
   };
   handleRemove = () => {
     let promises = [];
-    const remove = this.state.following
-      .filter(item => item.channel.followers < this.state.count)
-      .forEach(item => {
-        promises.push(
-          removeUserFollows({ id: this.state.id, channel_id: item.channel._id })
-        );
-      });
+    // const remove = this.state.following
+    //   .filter(item => item.channel.followers < this.state.count)
+    //   .forEach(item => {
+    //     promises.push(
+    //       removeUserFollows({ id: this.state.id, channel_id: item.channel._id })
+    //     );
+    //   });
 
     Promise.all(promises).then(res => {
       this.onGetUserFollows(this.state.id, this.state.page);
